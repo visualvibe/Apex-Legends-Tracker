@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+@import url('http://allfont.net/allfont.css?fonts=agency-fb');
+@import url('https://fonts.googleapis.com/css?family=Chakra+Petch');
+
+body{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.main-container{
+    
+}
+
+.header{
+    background-image: linear-gradient(to bottom left, #ff7570 25%, #285eff);
+    height: 500px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Agency FB', arial;
+    color: white;
+    font-size: 11rem;
+    font-weight: bold;
+    z-index: 1;
+    border-bottom: 5px solid white;
+}
+
+.header > span{
+    position: relative;
+    top: 100px;
+    z-index: 1;
+}
+
+.header > span > span{
+    -webkit-text-stroke: 0.1px white;
+    font-family: 'Orbitron', sans-serif;
+    color: transparent;  
+    position: absolute;
+    display: inline-block;
+    right: -205px;
+    top: 175px;
+    height: 180px;
+    width: 650px;
+    font-size: 55px;
+    opacity: 1;
+    z-index: 2;
+}
+
+
+.header > span:before{
+    content: '';
+    background: black;
+    position: absolute;
+    height: 250px;
+    width: 1395px;
+    right: -285px;
+    bottom: -25px;
+    z-index: -1;
+    opacity: 0.1;
+    box-shadow: 1px 1px 25px black;
+}
+
+
+.header > span > span:after{
+    content: '';
+    background: white;
+    border-radius: 15px 5px 15px 45px;
+    right: 43px;
+    top: 8px;
+    position: absolute;
+    height: 55px;
+    width: 580px;
+    z-index: -1;
+    opacity: 0.2;
+    box-shadow: 1px 1px 4px black;
+}
+
+#statsbg{
+    position: relative;
+    display: inline;
+    height: 180px;
+    width: 450px;
+}
+
+.form-search{
+    position: relative;
+    top: 260px;
+    z-index: 16;
+}
+
+.form-search #playerName{
+
+    z-index: 16;
+    height: 65px;
+    width: 750px;
+    border: white;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 1px 5px 10px black;
+    color: #ff7570;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 25px;
+    border-left: 55px solid #ffd8d4;
+    padding-right: 55px;
+}
+
+.form-search:before{
+    content: url('/assets/search.svg');
+    color: white;
+    position: absolute;
+    display: inline-block;
+    top: 32%;
+    right: 1295px;
+    z-index: 15;
+}
+
+
+#playername::placeholder{
+    color: #ff7570;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 25px;
+}
+
+.bottom{
+    z-index: 1;
+
+    width: 100%;
+    height: 432px;
+}
+.bottom > .bottom-bg{
+    background-image: url('/assets/bottombg2.jpg');
+    background-color: rgba(35, 64, 153, 01);
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+}
+
+.bottom > .bottom-bg:before{
+    content: '';
+    display: inline-block;
+    position: absolute;
+    height: 432px;
+    width: 100%;
+    background: black;
+    opacity: 0.6;
+}
+
+
+.bottom > .bottom-bg2{
+    width: 100%;
+    height: 100%;
+    background: black;
+}
+
+.stats{
+
+    color: white;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100%;
+    bottom: 432px;
+    z-index: 2;
+    animation: fadein 1s;
+}
+
+@keyframes fadein{
+    from{
+        opacity:0
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+.stats .stats-bg{
+    background: black;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    box-shadow: 1px 15px 15px black;
+
+}
+
+.stats .stats-content{
+    font-size: 35px;
+    position: relative;
+    bottom: 455px;
+}

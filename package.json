@@ -1,0 +1,34 @@
+{
+  "name": "apex-tracker",
+  "version": "1.0.0",
+  "description": "Apex Tracker Stats Website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/visualvibe/Apex-Legends-Tracker.git"
+  },
+  "keywords": [
+    "Apex",
+    "Legends",
+    "Stats",
+    "Website",
+    "Tracker"
+  ],
+  "author": "Bjorne Raga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/visualvibe/Apex-Legends-Tracker/issues"
+  },
+  "homepage": "https://github.com/visualvibe/Apex-Legends-Tracker#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "http": "0.0.0",
+    "request": "^2.88.0",
+    "socket.io": "^2.2.0"
+  }
+}
