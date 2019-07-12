@@ -75,6 +75,27 @@ body{
     box-shadow: 1px 1px 4px black;
 }
 
+#notFound{
+    position: absolute;
+    color: white;
+    left: 46%;
+    top: 500px;
+    font-size: 25px;
+    letter-spacing: 2px;
+    text-shadow: 1px 2px black;
+}
+
+@keyframes notFound-slide{
+    0%{
+        top: 500px
+    }
+    100%{
+        top: 420px;
+    }
+
+
+}
+
 #statsbg{
     position: relative;
     display: inline;
@@ -97,10 +118,10 @@ body{
     text-align: center;
     border-radius: 5px;
     box-shadow: 1px 5px 10px black;
-    color: #ff7570;
+    color: grey;
     font-family: 'Chakra Petch', sans-serif;
     font-size: 25px;
-    border-left: 55px solid #ffd8d4;
+    border-left: 55px solid #ff7570;
     padding-right: 55px;
 }
 
@@ -116,7 +137,7 @@ body{
 
 
 #playername::placeholder{
-    color: #ff7570;
+    color: grey;
     font-family: 'Chakra Petch', sans-serif;
     font-size: 25px;
 }

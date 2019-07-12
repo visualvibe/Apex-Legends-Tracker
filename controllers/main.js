@@ -1,10 +1,35 @@
 var bodyParser = require('body-parser');
 var urlencondedParser = bodyParser.urlencoded({extended: false});
+var crypto = require('crypto');
 const request = require('request');
 const key = "14789a43-3855-435c-8ed0-e8e67ea56914";
-var socket = require('socket.io');
+
 
 module.exports = function(app, server){
+
+    //Sets up session use
+    const ONE_HOURS = 1000 * 60 * 60 * 1;
+    const {
+        PORT = 3000,
+        NODE_ENV = 'development',
+        SESS_NAME = 'sid',
+        SESS_SECRET = 'xde',
+        SESS_LIFETIME= ONE_HOURS
+    }   =     process.env
+    const IN_PROD = NODE_ENV === 'production'
+    const session = require('express-session');
+
+    app.use(session({
+        name: SESS_NAME,
+        resave: false,
+        saveUninitialized: false,
+        secret: SESS_SECRET,
+        cookie:{
+            maxAge: SESS_LIFETIME,
+            sameSite: true,
+            secure: IN_PROD
+        }
+    }));
 
     //Function to call Apex Legends API. Returns the body of the API call.
     const apiCall = (playerName) => {
@@ -25,44 +50,53 @@ module.exports = function(app, server){
           });
         });
     }
+
+    var generate_key = function() {
+        var sha = crypto.createHash('sha256');
+        sha.update(Math.random().toString());
+        return sha.digest('hex');
+    };
+
+  
+    //Renders home page
     app.get('/', urlencondedParser, async (req, res) =>{
-
-        //const x = await apiCall();
-        //console.log(x.data.metadata.platformUserId);
-
+        if(req.session.userID){
+            req.session.destroy(err =>{
+                if(err) throw err;
+            });
+            res.clearCookie(SESS_NAME);
+        }
         res.render('home');
     });
 
-    app.get('/search', urlencondedParser, async (req, res) =>{
 
-        //const x = await apiCall();
-        //console.log(x.data.metadata.platformUserId);
+    //Get method for direct playerName search in URL
+    app.get('/search/:playerName', urlencondedParser, async (req, res) =>{
+        const x = await apiCall(req.params.playerName);
+        var didVisit = 1;
 
-        res.render('search');
+        //Checks if user is found in API
+        if(x.errors !== undefined && x.errors[0].code == "CollectorResultStatus::NotFound"){
+            var error = 1;
+            res.render('home', {error: error});
+            return;
+        }
+        //If no session render search with animation else render page with no animation
+        if(!req.session.userID){
+            req.session.userID = generate_key();
+            didVisit = 0;
+            res.render('search', {data: x, didVisit: didVisit});
+            return;
+        }
+        res.render('search', {data: x, didVisit: didVisit});
+
     });
+
 
     //Post method to find player name from api to render search page with player data
     app.post('/search', urlencondedParser, async (req, res) =>{
-        const x = await apiCall(req.body.playerName);
-        console.log(x);
-        res.send(JSON.stringify(x));
-        //res.render('search', {data: x});
+        //Redirects to get method for search/:playerName
+        res.redirect('search/'+ req.body.playerName);
     });
-
-    //Socket setup
-    var io = socket(server);
-
-    io.on('connection', (socket)=>{
-        console.log('made socket connection', socket.id)
-
-        socket.on('Data', async (data) =>{
-            console.log(data);
-            const x = await apiCall(data.message);
-            console.log(x);
-            socket.emit('Data', x);
-        });
-
-    });
-
 
 }

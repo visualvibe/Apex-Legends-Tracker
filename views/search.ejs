@@ -18,7 +18,7 @@
                 });
             });
         </script>
-        <!--<script src="/assets/search.js" type="text/javascript"></script>-->
+        <script src="/assets/search.js" type="text/javascript"></script>
     </head>
     <%  var pathfinder = "https://cdn3.whatculture.com/images/2019/02/b9a66d3bad0db6fc-600x338.png";
         var lifeline = "https://cdn.vox-cdn.com/thumbor/8eFOQV8hAOBsQNTLVWDZjZ-4uAw=/0x0:1920x1080/1200x800/filters:focal(903x276:1209x582)/cdn.vox-cdn.com/uploads/chorus_image/image/63050039/apex_concept_art_wallpaper_lifeline.0.png";
@@ -37,9 +37,9 @@
         <div class="main-container">
             <div class="header">
                 <div class="stattracker-bg"></div>
-                <span>APEX LEGENDS <span>STATS TRACKER</span></span>
+                <span id="text">APEX LEGENDS <span>STATS TRACKER</span></span>
                 <div class="form-search">
-                    <form method="POST" action="search">
+                    <form method="POST" action="http://localhost:3000/search">
                         <input type="text" id="playerName" name="playerName" placeholder="Search player name...">
                     </form>
                 </div>
@@ -52,12 +52,13 @@
                         <div class="stats-header-left-bg"></div>
                         <div class="stats-header-content">
                             <div class="stats-header-content-bg"></div>
-                            <img id="x" src='https://secure.download.dm.origin.com/production/avatar/prod/1/599/208x208.JPEG'>
+                            <img id="x" src='<%=data.data.metadata.avatarUrl%>'>
                             <span><%= data.data.metadata.platformUserId %></span>
                         </div>
 
                         <div class="lifetimestats">
                             <div class="lifetimestats-bg"></div>
+                            <div class="lifetimestnats-content-container">
                             <% for(var i = 0; i < data.data.stats.length; i++) { %>
                                 <div class="lifetimestats-content">
                                     <span id="tooltip">RANK <%=data.data.stats[i].displayRank%></span>
@@ -66,6 +67,7 @@
                                     <span id="rank"><%= data.data.stats[i].displayPercentile %></span>
                                 </div>
                             <% } %>
+                        </div>
                         </div>
                        
 
@@ -153,3 +155,23 @@
         </div>
     </body>
 </html>
+
+<script>
+        var header = document.getElementsByClassName('header');
+        var form = document.getElementsByClassName('form-search');
+        var text = document.getElementById('text');
+        var x = "<%= didVisit %>";
+        console.log(x);
+        function stopAnimation(header, form, text){
+            $(header).css("animation", "none");
+            $(header).css("height", "285px");
+            $(form).css("animation", "none");
+            $(form).css("top", "45px");
+            $(text).css("animation", "none");
+            $(text).css("top", "0");
+        }
+
+        if(x==1){
+            stopAnimation(header, form, text);
+        }
+</script>

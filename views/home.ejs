@@ -14,8 +14,9 @@
             <div class="header">
                 <div class="stattracker-bg"></div>
                 <span>APEX LEGENDS <span>STATS TRACKER</span></span>
+                <div id="notFound">User not found!</div>
                 <div class="form-search">
-                    <form method="POST" action="search">
+                    <form method="POST" action="/search">
                         <input type="text" id="playerName" name="playerName" placeholder="Search player name...">
                     </form>
                 </div>
@@ -33,3 +34,18 @@
         </div>
     </body>
 </html>
+
+<script>
+        var notFound = document.getElementById('notFound');
+        "<% var error; if(error !== undefined){ var e = error} %>"
+
+        var x = "<%= e %>";
+        function start(notFound){
+            $(notFound).css("animation", "notFound-slide 1s forwards");
+
+        }
+
+        if(x==1){
+            start(notFound);
+        }
+</script>
